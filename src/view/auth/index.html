@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Erlang OpenID 2.0 example</title>
+  </head>
+  <body>
+    <h1>Erlang OpenID 2.0 example</h1>
+
+    {% if error %}
+    <strong style="color: red;">{{ error }}</strong>
+    {% endif %}
+
+    <p>Choose whether to use identity gateway or a custom OpenID XRI specified by hand:</p>
+
+    <form method="post">
+      <label>Identity gateway:
+        <select name="openid_identity">
+          <option value="https://www.google.com/accounts/o8/id">Google</option>
+          <option value="https://yahoo.com/">Yahoo</option>
+        </select>
+      </label>
+      <label><input type="submit" value="Go Ahead!" /></label>
+    </form>
+    <strong>&ndash;&nbsp;or&nbsp;&ndash;</strong>
+    <form method="post">
+      <label>OpenID XRI:
+        <input name="openid_identity" type="text" required />
+      </label>
+      <label><input type="submit" value="Go Ahead!" /></label>
+    </form>
+
+    <p>Your <strong>_before</strong> is: {{ _before|default_if_none:"N/A" }}</p>
+    <p>Your submitted <strong>identity</strong> is: {{ identity }}</p>
+    <p>Your <strong>authentication URI</strong> is: {% if auth_uri %}<a href="{{ auth_uri }}">{{ auth_uri }}</a>{% else %}N/A{% endif %}</p>
+  </body>
+</html>
+
